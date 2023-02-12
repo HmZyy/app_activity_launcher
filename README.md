@@ -14,7 +14,7 @@ To use this plugin, add `app_activity_launcher` as a dependency in your pubspec.
 
 ```yaml
 dependencies:
-  app_activity_launcher: ^0.0.1
+  app_activity_launcher: ^0.0.2
 ```
 
 ### Start an external app

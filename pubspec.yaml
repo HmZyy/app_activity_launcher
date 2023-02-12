@@ -1,6 +1,6 @@
 name: app_activity_launcher
 description: A plugin to open external apps in a specific activity, with extras
-version: 0.0.1
+version: 0.0.2
 homepage:
 repository: https://github.com/HmZyy/app_activity_launcher
 
