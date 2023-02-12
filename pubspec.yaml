@@ -2,6 +2,7 @@ name: app_activity_launcher
 description: A new Flutter plugin project.
 version: 0.0.1
 homepage:
+repository: https://github.com/HmZyy/app_activity_launcher
 
 environment:
   sdk: '>=2.18.6 <3.0.0'
