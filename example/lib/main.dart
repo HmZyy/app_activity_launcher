@@ -37,7 +37,13 @@ class _MyAppState extends State<MyApp> {
   }
 
   _openVibePlyr() async {
-    var res = await _app.openMarket(appId: "io.mediaon.vibeplyr");
+    var res = await _app.openActivity(
+        appId: "io.mediaon.vibeplyr",
+        activity: "PlayerActivity",
+        extras: {
+          "url":
+              "https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/1080/Big_Buck_Bunny_1080_10s_1MB.mp4"
+        });
     print(res);
   }
 }

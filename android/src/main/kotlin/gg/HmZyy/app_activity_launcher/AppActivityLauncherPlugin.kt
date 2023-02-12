@@ -32,12 +32,21 @@ class AppActivityLauncherPlugin : FlutterPlugin, MethodCallHandler {
         when (call.method) {
             "openApp" -> {
                 val appId = call.argument<String>("appId")
-                val res = openApp(appId)
+                val extras = call.argument<Map<String, String>>("extras")
+                val res = openApp(appId, extras)
                 result.success(res)
             }
             "openMarket" -> {
                 val appId = call.argument<String>("appId")
-                val res = openMarket(appId)
+                val extras = call.argument<Map<String, String>>("extras")
+                val res = openMarket(appId, extras)
+                result.success(res)
+            }
+            "openActivity" -> {
+                val appId = call.argument<String>("appId")
+                val act = call.argument<String>("activity")
+                val extras = call.argument<Map<String, String>>("extras")
+                val res = openActivity(appId, act, extras)
                 result.success(res)
             }
             else -> result.notImplemented()
@@ -48,28 +57,62 @@ class AppActivityLauncherPlugin : FlutterPlugin, MethodCallHandler {
         channel.setMethodCallHandler(null)
     }
 
-    private fun openApp(appId: String?): Boolean {
+    private fun openApp(appId: String?, extras: Map<String, String>): Boolean {
         val intent = Intent(Intent.ACTION_VIEW)
         intent.addFlags(FLAG_ACTIVITY_NEW_TASK)
         if (appId != null)
             intent.setPackage(appId)
+        if (extras != null) {
+            for ((key, value) in extras) {
+                intent.putExtra(key, value)
+            }
+        }
         try {
             context.startActivity(intent)
             return true
         } catch (e: Exception) {
+            println(e)
             return false
         }
     }
 
-    private fun openMarket(appId: String?): Boolean {
+    private fun openMarket(appId: String?, extras: Map<String, String>): Boolean {
         val intent = Intent(Intent.ACTION_VIEW)
         intent.addFlags(FLAG_ACTIVITY_NEW_TASK)
         if (appId != null)
             intent.data = Uri.parse("market://details?id=$appId")
+        if (extras != null) {
+            for ((key, value) in extras) {
+                intent.putExtra(key, value)
+            }
+        }
         try {
             context.startActivity(intent)
             return true
         } catch (e: Exception) {
+            println(e)
+            return false
+        }
+    }
+
+    private fun openActivity(appId: String?, act: String?, extras: Map<String, String>?): Boolean {
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.addFlags(FLAG_ACTIVITY_NEW_TASK)
+        if (appId != null && act != null)
+            intent.setClassName(
+                "$appId",
+                "$appId.$act"
+            )
+        if (extras != null) {
+            for ((key, value) in extras) {
+                intent.putExtra(key, value)
+            }
+        }
+        try {
+            context.startActivity(intent)
+            return true
+        } catch (e: Exception) {
+            println(e)
             return false
         }
     }

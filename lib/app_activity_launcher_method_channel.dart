@@ -17,16 +17,28 @@ class MethodChannelAppActivityLauncher extends AppActivityLauncherPlatform {
   }
 
   @override
-  Future<bool?> openApp({required String appId}) async {
+  Future<bool?> openApp(
+      {required String appId, Map<String, String>? extras}) async {
     var result = await methodChannel.invokeMethod<bool>(
-        'openApp', {"appId": appId});
+        'openApp', {"appId": appId, "extras": extras});
     return result;
   }
 
   @override
-  Future<bool?> openMarket({required String appId}) async {
+  Future<bool?> openMarket(
+      {required String appId, Map<String, String>? extras}) async {
     var result = await methodChannel.invokeMethod<bool>(
-        'openMarket', {"appId": appId});
+        'openMarket', {"appId": appId, "extras": extras});
+    return result;
+  }
+
+  @override
+  Future<bool?> openActivity(
+      {required String appId, required String activity, Map<String,
+          String>? extras }) async {
+    var result = await methodChannel.invokeMethod<bool>(
+        'openActivity',
+        {"appId": appId, "activity": activity, "extras": extras});
     return result;
   }
 }
