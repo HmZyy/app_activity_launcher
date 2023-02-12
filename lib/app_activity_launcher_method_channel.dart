@@ -11,7 +11,22 @@ class MethodChannelAppActivityLauncher extends AppActivityLauncherPlatform {
 
   @override
   Future<String?> getPlatformVersion() async {
-    final version = await methodChannel.invokeMethod<String>('getPlatformVersion');
+    final version = await methodChannel.invokeMethod<String>(
+        'getPlatformVersion');
     return version;
+  }
+
+  @override
+  Future<bool?> openApp({required String appId}) async {
+    var result = await methodChannel.invokeMethod<bool>(
+        'openApp', {"appId": appId});
+    return result;
+  }
+
+  @override
+  Future<bool?> openMarket({required String appId}) async {
+    var result = await methodChannel.invokeMethod<bool>(
+        'openMarket', {"appId": appId});
+    return result;
   }
 }

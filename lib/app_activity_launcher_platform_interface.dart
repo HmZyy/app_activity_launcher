@@ -26,4 +26,12 @@ abstract class AppActivityLauncherPlatform extends PlatformInterface {
   Future<String?> getPlatformVersion() {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
+
+  Future<bool?> openApp({required String appId}) {
+    throw UnimplementedError('openApp() has not been implemented.');
+  }
+
+  Future<bool?> openMarket({required String appId}) {
+    throw UnimplementedError('openMarket() has not been implemented.');
+  }
 }
