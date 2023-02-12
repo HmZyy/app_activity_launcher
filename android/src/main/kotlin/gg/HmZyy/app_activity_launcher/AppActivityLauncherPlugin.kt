@@ -57,7 +57,7 @@ class AppActivityLauncherPlugin : FlutterPlugin, MethodCallHandler {
         channel.setMethodCallHandler(null)
     }
 
-    private fun openApp(appId: String?, extras: Map<String, String>): Boolean {
+    private fun openApp(appId: String?, extras: Map<String, String>?): Boolean {
         val intent = Intent(Intent.ACTION_VIEW)
         intent.addFlags(FLAG_ACTIVITY_NEW_TASK)
         if (appId != null)
@@ -76,7 +76,7 @@ class AppActivityLauncherPlugin : FlutterPlugin, MethodCallHandler {
         }
     }
 
-    private fun openMarket(appId: String?, extras: Map<String, String>): Boolean {
+    private fun openMarket(appId: String?, extras: Map<String, String>?): Boolean {
         val intent = Intent(Intent.ACTION_VIEW)
         intent.addFlags(FLAG_ACTIVITY_NEW_TASK)
         if (appId != null)
